@@ -1,4 +1,4 @@
-package org.example;
+package org.nachhilfeplattform.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
