@@ -1,21 +1,41 @@
 package org.nachhilfeplattform.model;
 
+import java.util.ArrayList;
+
 public class Anbieter {
 
-    private String name;
+    private int id;
+    private String benutzername;
+    private String email;
     private String passwort;
 
-    public Anbieter(String name, String passwort) {
-        this.name = name;
+    private ArrayList<Anzeige> anzeigen;
+
+    public Anbieter(String benutzername, String email, String passwort) {
+        this.benutzername = benutzername;
+        this.email = email;
         this.passwort = passwort;
+        this.anzeigen = new ArrayList<>();
     }
 
     public String getName() {
-        return name;
+        return benutzername;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPasswort() {
         return passwort;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 
