@@ -10,7 +10,7 @@ public class DatabaseInitializer {
         String sqlAnbieter = """
                 CREATE TABLE IF NOT EXISTS anbieter (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL UNIQUE,
+                    benutzername TEXT NOT NULL UNIQUE,
                     email TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL
                 );
@@ -21,7 +21,7 @@ public class DatabaseInitializer {
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     anbieter_id INTEGER NOT NULL,
                     klassenstufe TEXT NOT NULL,
-                    faecher TEXT NOT NULL,
+                    fach TEXT NOT NULL,
                     zeit TEXT NOT NULL,
                     beschreibung TEXT NOT NULL,
                     FOREIGN KEY (anbieter_id) REFERENCES anbieter(id)

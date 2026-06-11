@@ -2,29 +2,29 @@ package org.nachhilfeplattform.model;
 
 public class Anzeige {
 
-    private String name; //über foreign key anbieter_id
+    private String benutzername; //über foreign key anbieter_id
     private String klassenstufe;
     private String kontaktdaten; //selbe email wie beim User anbieter -> über db anbieter holen
-    private String faecher;
+    private String fach;
     private String zeit;
     private String beschreibung;
 
-    public Anzeige(String name, String klassenstufe, String kontaktdaten, String faecher, String zeit, String beschreibung, boolean login)
+    public Anzeige(String benutzername, String klassenstufe, String kontaktdaten, String fach, String zeit, String beschreibung, boolean login)
     {
-        this.name = name;
+        this.benutzername = benutzername;
         this.klassenstufe = klassenstufe;
         this.kontaktdaten = kontaktdaten;
-        this.faecher = faecher;
+        this.fach = fach;
         this.zeit = zeit;
         this.beschreibung = beschreibung;
 
     }
 
     public void datenAusgeben(){
-        System.out.println("Name: " + name);
+        System.out.println("Benutzername: " + benutzername);
         System.out.println("Klassenstufe: " + klassenstufe);
-        System.out.println("Kontaktdaten:"+kontaktdaten);
-        System.out.println("Fächer" + faecher);
+        System.out.println("Kontaktdaten:" + kontaktdaten);
+        System.out.println("Fach" + fach);
         System.out.println("Zeit"+ zeit);
         System.out.println("Beschreibung"+ beschreibung);
 
@@ -36,10 +36,10 @@ public class Anzeige {
     }
 
     public void anzeigeLöschen(){
-        name = "";
+        benutzername = "";
         klassenstufe = "";
         kontaktdaten = "";
-        faecher = "";
+        fach = "";
         zeit = "";
         beschreibung = "";
 
@@ -49,11 +49,11 @@ public class Anzeige {
     }
 
 
-    public void anzeigeBearbeiten(String neueFaecher, String neueZeit, String neueKlassenstufe, String neueBeschreibung, String neueKontaktdaten){
+    public void anzeigeBearbeiten(String neuesFach, String neueZeit, String neueKlassenstufe, String neueBeschreibung, String neueKontaktdaten){
 
         this.klassenstufe = neueKlassenstufe;
         this.kontaktdaten = neueKontaktdaten;
-        this.faecher = neueFaecher;
+        this.fach = neuesFach;
         this.zeit = neueZeit;
         this.beschreibung = neueBeschreibung;
 
