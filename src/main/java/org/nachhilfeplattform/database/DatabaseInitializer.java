@@ -7,7 +7,7 @@ public class DatabaseInitializer {
 
     public static void createTables() {
 
-        String sqlUsers = """
+        String sqlAnbieter = """
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL,
@@ -20,7 +20,7 @@ public class DatabaseInitializer {
                 Connection conn = DatabaseConnection.getConnection();
                 Statement stmt = conn.createStatement()
         ) {
-            stmt.execute(sqlUsers);
+            stmt.execute(sqlAnbieter);
             System.out.println("Tabellen erstellt!");
 
         } catch (Exception e) {
