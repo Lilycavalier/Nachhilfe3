@@ -2,6 +2,7 @@ package org.nachhilfeplattform.view;
 
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.*;
 
 public class LoginFrame extends JFrame {
 
@@ -34,8 +35,13 @@ public class LoginFrame extends JFrame {
         passwort.setBounds(90, 160, 200, 30);
         add(passwort);
 
+        JLabel fehler = new JLabel("Das Passwort oder die E-Mail ist falsch!");
+        fehler.setBounds(80, 200, 300, 30);
+        fehler.setForeground(Color.RED);
+        add(fehler);
+        
         JButton ok = new JButton("OK");
-        ok.setBounds(155, 200, 70, 30);
+        ok.setBounds(155, 230, 70, 30);
         add(ok);
 
         setVisible(true);
