@@ -7,12 +7,24 @@ public class DatabaseInitializer {
 
     public static void createTables() {
 
-        String sqlUsers = """
-                CREATE TABLE IF NOT EXISTS users (
+        String sqlAnbieter = """
+                CREATE TABLE IF NOT EXISTS anbieter (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    email TEXT NOT NULL,
+                    benutzername TEXT NOT NULL UNIQUE,
+                    email TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL
+                );
+                """;
+
+        String sqlAnzeigen = """
+                CREATE TABLE IF NOT EXISTS anzeigen (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    anbieter_id INTEGER NOT NULL,
+                    klassenstufe TEXT NOT NULL,
+                    fach TEXT NOT NULL,
+                    zeit TEXT NOT NULL,
+                    beschreibung TEXT NOT NULL,
+                    FOREIGN KEY (anbieter_id) REFERENCES anbieter(id)
                 );
                 """;
 
@@ -20,7 +32,8 @@ public class DatabaseInitializer {
                 Connection conn = DatabaseConnection.getConnection();
                 Statement stmt = conn.createStatement()
         ) {
-            stmt.execute(sqlUsers);
+            stmt.execute(sqlAnbieter);
+            stmt.execute(sqlAnzeigen);
             System.out.println("Tabellen erstellt!");
 
         } catch (Exception e) {

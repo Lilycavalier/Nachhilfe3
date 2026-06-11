@@ -1,19 +1,40 @@
 package org.nachhilfeplattform.model;
 
+public class Anbieter {
+
+    private String name;
+    private String passwort;
+
+    public Anbieter(String name, String passwort) {
+        this.name = name;
+        this.passwort = passwort;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPasswort() {
+        return passwort;
+    }
+}
+
+
+/*
 public class Anbieter{
 
     private String name;
     private String passwort;
-    private Anbieter Anbieter;
+    private ArrayList<Anzeige> anzeigen;
 
 
     public Anbieter(String name, String passwort)
     {
         this.name = name;
         this.passwort = passwort;
-        this.Anbieter = new Anbieter(name, passwort);
 
     }
+
 
     public void datenAusgeben(){
         System.out.println("Name: " + name);
@@ -45,4 +66,4 @@ public class Anbieter{
         }
     }
 
-}
+}*/
