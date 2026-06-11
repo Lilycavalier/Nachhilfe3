@@ -9,10 +9,6 @@ public class Anzeige {
     private String faecher;
     private String zeit;
 
-    private int anzeigeErstellen();
-    private int anzeigeLöschen();
-    private int anzeigeBearbeiten();
-
     public Anzeige(String name, String klassenstufe, String passwort, String kontaktdaten, String faecher, String zeit, boolean login)
     {
         this.name = name;

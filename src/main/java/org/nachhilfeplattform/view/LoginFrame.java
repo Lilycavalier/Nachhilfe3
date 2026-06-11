@@ -18,11 +18,19 @@ public class LoginFrame extends JFrame {
         label.setFont(new Font("Arial", Font.PLAIN, 30));
         add(label);
 
-        JTextField email = new JTextField("Email: ");
+        JLabel emailLabel = new JLabel("E-Mail:");
+        emailLabel.setBounds(20, 120, 60, 30);
+        add(emailLabel);
+
+        JTextField email = new JTextField();
         email.setBounds(90, 120, 200, 30);
         add(email);
 
-        JTextField passwort = new JTextField("Passwort: ");
+        JLabel passwortLabel = new JLabel("Passwort:");
+        passwortLabel.setBounds(20, 160, 70, 30);
+        add(passwortLabel);
+
+        JPasswordField passwort = new JPasswordField();
         passwort.setBounds(90, 160, 200, 30);
         add(passwort);
 
