@@ -2,9 +2,9 @@ package org.nachhilfeplattform.model;
 
 public class Anzeige {
 
-    private String name;
+    private String name; //über foreign key anbieter_id
     private String klassenstufe;
-    private String kontaktdaten;
+    private String kontaktdaten; //selbe email wie beim User anbieter -> über db anbieter holen
     private String faecher;
     private String zeit;
     private String beschreibung;

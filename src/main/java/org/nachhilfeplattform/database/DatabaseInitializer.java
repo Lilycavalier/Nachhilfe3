@@ -19,12 +19,12 @@ public class DatabaseInitializer {
         String sqlAnzeigen = """
                 CREATE TABLE IF NOT EXISTS anzeigen (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
+                    anbieter_id INTEGER NOT NULL,
                     klassenstufe TEXT NOT NULL,
-                    kontaktdaten TEXT NOT NULL,
                     faecher TEXT NOT NULL,
                     zeit TEXT NOT NULL,
-                    beschreibung TEXT NOT NULL
+                    beschreibung TEXT NOT NULL,
+                    FOREIGN KEY (anbieter_id) REFERENCES anbieter(id)
                 );
                 """;
 
