@@ -2,18 +2,17 @@ package org.nachhilfeplattform.model;
 
 public class Anzeige {
 
-    private String benutzername; //über foreign key anbieter_id
+    private String anbieter_id; //über foreign key anbieter_id
     private String klassenstufe;
     private String kontaktdaten; //selbe email wie beim User anbieter -> über db anbieter holen
     private String fach;
     private String zeit;
     private String beschreibung;
 
-    public Anzeige(String benutzername, String klassenstufe, String kontaktdaten, String fach, String zeit, String beschreibung, boolean login)
+    public Anzeige(String anbieter_id, String klassenstufe, String fach, String zeit, String beschreibung, boolean login)
     {
-        this.benutzername = benutzername;
+        this.anbieter_id = anbieter_id;
         this.klassenstufe = klassenstufe;
-        this.kontaktdaten = kontaktdaten;
         this.fach = fach;
         this.zeit = zeit;
         this.beschreibung = beschreibung;
@@ -21,9 +20,8 @@ public class Anzeige {
     }
 
     public void datenAusgeben(){
-        System.out.println("Benutzername: " + benutzername);
+        System.out.println("anbieter_id: " + anbieter_id);
         System.out.println("Klassenstufe: " + klassenstufe);
-        System.out.println("Kontaktdaten:" + kontaktdaten);
         System.out.println("Fach" + fach);
         System.out.println("Zeit"+ zeit);
         System.out.println("Beschreibung"+ beschreibung);
@@ -36,9 +34,8 @@ public class Anzeige {
     }
 
     public void anzeigeLöschen(){
-        benutzername = "";
+        anbieter_id = "";
         klassenstufe = "";
-        kontaktdaten = "";
         fach = "";
         zeit = "";
         beschreibung = "";
@@ -49,10 +46,8 @@ public class Anzeige {
     }
 
 
-    public void anzeigeBearbeiten(String neuesFach, String neueZeit, String neueKlassenstufe, String neueBeschreibung, String neueKontaktdaten){
-
+    public void anzeigeBearbeiten(String neuesFach, String neueZeit, String neueKlassenstufe, String neueBeschreibung){
         this.klassenstufe = neueKlassenstufe;
-        this.kontaktdaten = neueKontaktdaten;
         this.fach = neuesFach;
         this.zeit = neueZeit;
         this.beschreibung = neueBeschreibung;
@@ -60,53 +55,4 @@ public class Anzeige {
         System.out.println("Anzeige wurde bearbeitet");
 
     }
-
-    public String getBenutzername(){
-        return benutzername;
-    }
-
-    public String getKlassenstufe(){
-        return klassenstufe;
-    }
-
-    public String getKontaktdaten(){
-        return kontaktdaten;
-    }
-
-    public String getFach(){
-        return fach;
-    }
-
-    public String getZeit(){
-        return zeit;
-    }
-
-    public String getBeschreibung(){
-        return beschreibung;
-    }
-
-    public void setBenutzername(String benutzername){
-        this.benutzername = benutzername;
-    }
-
-    public void setKlassenstufe(String klassenstufe){
-        return this.klassenstufe = klassenstufe;
-    }
-
-    public void setKontaktdaten(String klassenstufe){
-        return this.kontaktdaten = kontaktdaten;
-    }
-
-    public void setFach(String fach){
-        return this.fach = fach;
-    }
-
-    public void setZeit(String zeit){
-        return this.zeit = zeit;
-    }
-
-    public void setBeschreibung(String beschreibung){
-        return this.beschreibung = beschreibung;
-    }
-
 }

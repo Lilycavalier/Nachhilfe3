@@ -1,6 +1,8 @@
 package org.nachhilfeplattform.app;
 
+import org.nachhilfeplattform.database.AnbieterDAO;
 import org.nachhilfeplattform.database.DatabaseInitializer;
+import org.nachhilfeplattform.model.Anbieter;
 import org.nachhilfeplattform.view.LoginFrame;
 import org.nachhilfeplattform.view.HomeFrame;
 
@@ -10,6 +12,12 @@ public class Main {
 
         DatabaseInitializer.createTables();
         new LoginFrame();
+        AnbieterDAO dao = new AnbieterDAO();
+
+        Anbieter lena =
+                new Anbieter("Jessy", "jessy@mail.de", "1234");
+
+        dao.AnbieterSpeichern(lena);
 
     }
 }
