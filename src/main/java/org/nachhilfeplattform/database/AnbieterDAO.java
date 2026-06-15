@@ -1,13 +1,57 @@
 package org.nachhilfeplattform.database;
 
+import org.nachhilfeplattform.model.Anbieter;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 public class AnbieterDAO {
 
-    private Connection conn = DatabaseConnection.getConnection();
+    public void AnbieterSpeichern(Anbieter anbieter) {
 
-    // später:
-    // createUser()
-    // login()
-    // getUserByEmail()
+        String sql =
+                "INSERT INTO anbieter(name, email, passwort) VALUES (?, ?, ?)";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setString(1, anbieter.getName());
+            stmt.setString(2, anbieter.getEmail());
+            stmt.setString(3, anbieter.getPasswort());
+
+            stmt.executeUpdate();
+
+            System.out.println("Anbieter gespeichert!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean login(String email, String passwort) {
+        String sql =
+                "SELECT * FROM anbieter WHERE email = ? AND passwort = ?";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+
+                PreparedStatement stmt =
+                        conn.prepareStatement(sql)
+        ) {
+
+            stmt.setString(1, email);
+            stmt.setString(2, passwort);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

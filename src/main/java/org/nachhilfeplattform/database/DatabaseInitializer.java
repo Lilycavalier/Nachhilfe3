@@ -12,7 +12,7 @@ public class DatabaseInitializer {
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     benutzername TEXT NOT NULL UNIQUE,
                     email TEXT NOT NULL UNIQUE,
-                    password TEXT NOT NULL
+                    passwort TEXT NOT NULL
                 );
                 """;
 
