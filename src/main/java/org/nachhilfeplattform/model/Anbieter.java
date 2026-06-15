@@ -18,6 +18,10 @@ public class Anbieter {
         this.anzeigen = new ArrayList<>();
     }
 
+    public boolean passwortPrüfen(String eingegebenesPasswort){
+        return this.passwort.equals(eingegebenesPasswort);
+    }
+
     public String getName() {
         return benutzername;
     }
@@ -30,12 +34,16 @@ public class Anbieter {
         return passwort;
     }
 
-    public int getId() {
-        return id;
+    public void setName(String name) {
+        this.benutzername = benutzername;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmail(String Email) {
+        this.email = email;
+    }
+
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
     }
 }
 
