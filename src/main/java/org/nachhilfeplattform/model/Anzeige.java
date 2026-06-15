@@ -60,4 +60,53 @@ public class Anzeige {
         System.out.println("Anzeige wurde bearbeitet");
 
     }
+
+    public String getBenutzername(){
+        return benutzername;
+    }
+
+    public String getKlassenstufe(){
+        return klassenstufe;
+    }
+
+    public String getKontaktdaten(){
+        return kontaktdaten;
+    }
+
+    public String getFach(){
+        return fach;
+    }
+
+    public String getZeit(){
+        return zeit;
+    }
+
+    public String getBeschreibung(){
+        return beschreibung;
+    }
+
+    public void setBenutzername(String benutzername){
+        this.benutzername = benutzername;
+    }
+
+    public void setKlassenstufe(String klassenstufe){
+        return this.klassenstufe = klassenstufe;
+    }
+
+    public void setKontaktdaten(String klassenstufe){
+        return this.kontaktdaten = kontaktdaten;
+    }
+
+    public void setFach(String fach){
+        return this.fach = fach;
+    }
+
+    public void setZeit(String zeit){
+        return this.zeit = zeit;
+    }
+
+    public void setBeschreibung(String beschreibung){
+        return this.beschreibung = beschreibung;
+    }
+
 }

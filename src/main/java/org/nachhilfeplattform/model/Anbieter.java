@@ -10,12 +10,24 @@ public class Anbieter {
         this.passwort = passwort;
     }
 
+    public boolean passwortPrüfen(String eingegebenesPasswort){
+        return this.passwort.equals(eingegebenesPasswort);
+    }
+
     public String getName() {
         return name;
     }
 
     public String getPasswort() {
         return passwort;
+    }
+
+    public void setName(String name) {
+        return this.name = Name;
+    }
+
+    public void setPasswort(String passwort) {
+        return this.passwort = Passwort;
     }
 }
 
