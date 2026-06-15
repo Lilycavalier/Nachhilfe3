@@ -33,7 +33,6 @@ public class AnbieterDAO {
     public boolean login(String email, String passwort) {
         String sql =
                 "SELECT * FROM anbieter WHERE email = ? AND passwort = ?";
-
         try (
                 Connection conn = DatabaseConnection.getConnection();
 
