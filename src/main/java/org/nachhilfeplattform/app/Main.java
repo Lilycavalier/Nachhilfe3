@@ -11,7 +11,7 @@ public class Main {
 
         DatabaseInitializer.createTables();
         new HomeFrame();
-        new ArrowToggleExample();
+        //new ArrowToggleExample();
 
     }
 }

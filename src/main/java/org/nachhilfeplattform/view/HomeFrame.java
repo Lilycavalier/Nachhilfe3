@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 public class HomeFrame extends JFrame {
 
-   
 
     public HomeFrame() {
 
@@ -30,24 +29,17 @@ public class HomeFrame extends JFrame {
         //add(suchenButton);
 
         JLabel filter = new JLabel("Filter:");
-        filter.setBounds(30, 40, 200, 30);
+        filter.setBounds(10, 40, 200, 30);
         filter.setFont(new Font("Arial", Font.PLAIN, 22));
         add(filter);
 
-        JLabel filterStufe = new JLabel("Jahrgangsstufe:");
-        filterStufe.setBounds(30, 80, 200, 30);
-        filterStufe.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(filterStufe);
+        ArrowToggleExample togglePanel = new ArrowToggleExample();
+        togglePanel.setBounds(10, 60, 300, 250);
+        add(togglePanel);
 
-        JLabel filterFach = new JLabel("Fach:");
-        filterFach.setBounds(30, 100, 200, 30);
-        filterFach.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(filterFach);
-
-        JLabel filterStunde = new JLabel("Schulstunde:");
-        filterStunde.setBounds(30, 120, 200, 30);
-        filterStunde.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(filterStunde);
+        AkkordionFach togglePanelFach = new AkkordionFach();
+        togglePanelFach.setBounds(100, 60, 300, 250);
+        add(togglePanelFach);
 
         setVisible(true);
     }
