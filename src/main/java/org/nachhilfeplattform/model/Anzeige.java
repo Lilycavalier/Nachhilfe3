@@ -55,4 +55,56 @@ public class Anzeige {
         System.out.println("Anzeige wurde bearbeitet");
 
     }
+
+    public String getanbieter_id(){
+        return anbieter_id;
+    }
+
+     public String getklassenstufe(){
+        return klassenstufe;
+    }
+
+
+     public String getkontaktdaten(){
+        return kontaktdaten;
+    }
+
+     public String getfach(){
+        return fach;
+    }
+
+     public String getzeit(){
+        return zeit;
+    }
+
+     public String getbeschreibung(){
+        return beschreibung;
+    }
+
+
+
+public void setanbieter_id(String anbieter_id){
+        this.anbieter_id = anbieter_id;
+    }
+
+     public void setklassenstufe(String klassenstufe){
+        this.klassenstufe = klassenstufe;
+    }
+
+
+     public void setkontaktdaten(String kontaktdaten){
+        this.kontaktdaten = kontaktdaten;
+    }
+
+     public void setfach(String fach){
+        this.fach = fach;
+    }
+
+     public void setzeit(String zeit){
+        this.zeit = zeit;
+    }
+
+     public void setbeschreibung(String beschreibung){
+        this.beschreibung = beschreibung;
+    }
 }

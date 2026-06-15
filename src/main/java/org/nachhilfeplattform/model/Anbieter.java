@@ -33,6 +33,18 @@ public class Anbieter {
     public String getPasswort() {
         return passwort;
     }
+
+    public void setName(String name) {
+        this.benutzername = benutzername;
+    }
+
+    public void setEmail(String Email) {
+        this.email = email;
+    }
+
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
 }
 
 
