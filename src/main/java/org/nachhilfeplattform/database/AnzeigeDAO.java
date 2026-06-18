@@ -1,5 +1,6 @@
 package org.nachhilfeplattform.database;
 
+import org.nachhilfeplattform.model.Anzeige;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,11 +16,11 @@ public class AnzeigeDAO {
                 VALUES (?, ?, ?, ?, ?)
                 """;
         try (PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setInt(1, anzeige.anbieter_id);
-            stmt.setString(2, anzeige.klassenstufe);
-            stmt.setString(3, anzeige.fach);
-            stmt.setString(4, anzeige.zeit);
-            stmt.setString(5, anzeige.beschreibung);
+            stmt.setInt(1, anzeige.getanbieter_id());
+            stmt.setString(2, anzeige.getklassenstufe());
+            stmt.setString(3, anzeige.getfach());
+            stmt.setString(4, anzeige.getzeit());
+            stmt.setString(5, anzeige.getbeschreibung());
 
             stmt.executeUpdate();
         }catch(Exception e){
@@ -35,12 +36,11 @@ public class AnzeigeDAO {
            ResultSet rs = stmt.executeQuery();
            if (rs.next()) {
                 Anzeige anzeige = new Anzeige();
-                anzeige.id = rs.getInt("id");
-                anzeige.anbieter_id = rs.getInt("anbieter_id");
-                anzeige.klassenstufe = rs.getString("klassenstufe");
-                anzeige.fach = rs.getString("fach");
-                anzeige.zeit = rs.getString("zeit");
-                anzeige.beschreibung = rs.getString("beschreibung");
+                anzeige.setanbieter_id(rs.getInt("anbieter_id"));
+                anzeige.setklassenstufe(rs.getString("klassenstufe"));
+                anzeige.setfach(rs.getString("fach"));
+                anzeige.setzeit(rs.getString("zeit"));
+                anzeige.setbeschreibung(rs.getString("beschreibung"));
 
                 return anzeige;
            }
