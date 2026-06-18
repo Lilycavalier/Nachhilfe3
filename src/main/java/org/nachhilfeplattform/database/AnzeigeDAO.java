@@ -32,8 +32,6 @@ public class AnzeigeDAO {
 
             stmt.executeUpdate();
 
-            System.out.println("Anzeige gespeichert!");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,13 +40,11 @@ public class AnzeigeDAO {
     // Anzeige über ID laden
     public Anzeige AnzeigeAufrufen(int id) {
 
-        String sql =
-                "SELECT * FROM anzeigen WHERE id = ?";
+        String sql = "SELECT * FROM anzeigen WHERE id = ?";
 
         try (
                 Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt =
-                        conn.prepareStatement(sql)
+                PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setInt(1, id);
@@ -58,6 +54,7 @@ public class AnzeigeDAO {
             if (rs.next()) {
 
                 return new Anzeige(
+                        rs.getInt("id"),
                         rs.getInt("anbieter_id"),
                         rs.getString("klassenstufe"),
                         rs.getString("fach"),
@@ -78,19 +75,18 @@ public class AnzeigeDAO {
 
         List<Anzeige> anzeigen = new ArrayList<>();
 
-        String sql =
-                "SELECT * FROM anzeigen";
+        String sql = "SELECT * FROM anzeigen";
 
         try (
                 Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt =
-                        conn.prepareStatement(sql);
+                PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()
         ) {
 
             while (rs.next()) {
 
                 Anzeige anzeige = new Anzeige(
+                        rs.getInt("id"),
                         rs.getInt("anbieter_id"),
                         rs.getString("klassenstufe"),
                         rs.getString("fach"),
@@ -108,32 +104,46 @@ public class AnzeigeDAO {
         return anzeigen;
     }
 
+    // Update Anzeige
     public void updateAnzeige(int id, Anzeige anzeige) {
+
         String sql = """
-            UPDATE anzeige
+            UPDATE anzeigen
             SET klassenstufe = ?, fach = ?, zeit = ?, beschreibung = ?
             WHERE id = ?
         """;
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, anzeige.getklassenstufe());
-            stmt.setString(2, anzeige.getfach());
-            stmt.setString(3, anzeige.getzeit());
-            stmt.setString(4, anzeige.getbeschreibung());
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setString(1, anzeige.getKlassenstufe());
+            stmt.setString(2, anzeige.getFach());
+            stmt.setString(3, anzeige.getZeit());
+            stmt.setString(4, anzeige.getBeschreibung());
             stmt.setInt(5, id);
 
             stmt.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    // Delete Anzeige
     public void deleteAnzeige(int id) {
-        String sql = "DELETE FROM anzeige WHERE id = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        String sql = "DELETE FROM anzeigen WHERE id = ?";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
             stmt.setInt(1, id);
             stmt.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
