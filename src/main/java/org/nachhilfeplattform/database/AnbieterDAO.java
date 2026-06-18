@@ -10,14 +10,14 @@ public class AnbieterDAO {
     public void AnbieterSpeichern(Anbieter anbieter) {
 
         String sql =
-                "INSERT INTO anbieter(name, email, passwort) VALUES (?, ?, ?)";
+                "INSERT INTO anbieter(benutzername, email, passwort) VALUES (?, ?, ?)";
 
         try (
                 Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
-            stmt.setString(1, anbieter.getName());
+            stmt.setString(1, anbieter.getBenutzername());
             stmt.setString(2, anbieter.getEmail());
             stmt.setString(3, anbieter.getPasswort());
 
@@ -51,6 +51,45 @@ public class AnbieterDAO {
 
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public boolean emailExistiert(String email) {
+
+        String sql = "SELECT 1 FROM anbieter WHERE email = ?";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public void deleteAnbieter(int id) {
+
+        String sql = "DELETE FROM anbieter WHERE id = ?";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

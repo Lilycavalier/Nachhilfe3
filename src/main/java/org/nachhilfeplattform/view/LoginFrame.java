@@ -1,5 +1,7 @@
 package org.nachhilfeplattform.view;
 
+import org.nachhilfeplattform.database.AnbieterDAO;
+
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.*;
@@ -38,12 +40,34 @@ public class LoginFrame extends JFrame {
         JLabel fehler = new JLabel("Das Passwort oder die E-Mail ist falsch!");
         fehler.setBounds(80, 200, 300, 30);
         fehler.setForeground(Color.RED);
+        fehler.setVisible(false);
         add(fehler);
-        
+
         JButton ok = new JButton("OK");
         ok.setBounds(155, 230, 70, 30);
         add(ok);
 
-        setVisible(true);
+        ok.addActionListener(e -> {
+
+            fehler.setVisible(false); // immer zuerst ausblenden
+
+            String eingegebeneEmail = email.getText();
+            String eingegebenesPasswort = new String(passwort.getPassword());
+
+            AnbieterDAO dao = new AnbieterDAO();
+
+            boolean erfolgreich = dao.login(eingegebeneEmail, eingegebenesPasswort);
+
+            if (erfolgreich) {
+
+                dispose();
+                new HomeFrame();
+
+            } else {
+
+                fehler.setVisible(true);
+            }
+        });
     }
 }
+//test neu
