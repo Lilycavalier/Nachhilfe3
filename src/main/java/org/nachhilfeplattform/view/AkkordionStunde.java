@@ -5,14 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ArrowToggleExample extends JPanel{
+public class AkkordionStunde extends JPanel{
 
     private boolean expanded = false;
     private JButton arrowButton;
     private JPanel contentPanel;
-    private JButton closeButton;
 
-    public ArrowToggleExample(){
+    public AkkordionStunde(){
         setLayout(new BorderLayout());
 
         arrowButton = new JButton("+");
@@ -47,31 +46,31 @@ public class ArrowToggleExample extends JPanel{
         group.add(rb12);
         group.add(rb13);
 
-        contentPanel.add(new JLabel("5. Klasse"));
+        contentPanel.add(new JLabel("1.Stunde"));
         contentPanel.add(rb5);
 
-        contentPanel.add(new JLabel("6. Klasse"));
+        contentPanel.add(new JLabel("2.Stunde"));
         contentPanel.add(rb6);
 
-        contentPanel.add(new JLabel("7. Klasse"));
+        contentPanel.add(new JLabel("3.Stunde"));
         contentPanel.add(rb7);
 
-        contentPanel.add(new JLabel("8. Klasse"));
+        contentPanel.add(new JLabel("4.Stunde"));
         contentPanel.add(rb8);
         
-        contentPanel.add(new JLabel("9. Klasse"));
+        contentPanel.add(new JLabel("5.Stunde"));
         contentPanel.add(rb9);
 
-        contentPanel.add(new JLabel("10. Klasse"));
+        contentPanel.add(new JLabel("6.Stunde"));
         contentPanel.add(rb10);
 
-        contentPanel.add(new JLabel("11. Klasse"));
+        contentPanel.add(new JLabel("7.Stunde"));
         contentPanel.add(rb11);
 
-        contentPanel.add(new JLabel("12. Klasse"));
+        contentPanel.add(new JLabel("8.Stunde"));
         contentPanel.add(rb12);
 
-        contentPanel.add(new JLabel("13. Klasse"));
+        contentPanel.add(new JLabel("9.Stunde"));
         contentPanel.add(rb13);
        
         contentPanel.setVisible(false);
@@ -85,27 +84,15 @@ public class ArrowToggleExample extends JPanel{
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         headerPanel.add(arrowButton);
-        headerPanel.add(new JLabel("Jahrgangsstufe"));
+        headerPanel.add(new JLabel("Stunde"));
 
         add(headerPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
-
-       
-    
-
-        arrowButton.setSelected(false);
-        arrowButton.setText("+");
-        contentPanel.setVisible(false);
-        revalidate();
-        repaint();
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ArrowToggleExample::new);
-    } 
-}
-
-
+    }
 
         
-    
+    }

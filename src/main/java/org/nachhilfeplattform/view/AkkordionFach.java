@@ -84,7 +84,7 @@ public class AkkordionFach extends JPanel{
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         headerPanel.add(arrowButton);
-        headerPanel.add(new JLabel("Jahrgangsstufe"));
+        headerPanel.add(new JLabel("Fach"));
 
         add(headerPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
