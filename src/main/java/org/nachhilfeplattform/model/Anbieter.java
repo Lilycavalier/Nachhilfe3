@@ -20,6 +20,12 @@ public class Anbieter {
 
     public boolean passwortPrüfen(String eingegebenesPasswort){
         return this.passwort.equals(eingegebenesPasswort);
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,6 +51,11 @@ public class Anbieter {
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }
+
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
+
 }
 
 
