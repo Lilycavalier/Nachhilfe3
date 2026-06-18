@@ -12,23 +12,27 @@ public class Anbieter {
     private ArrayList<Anzeige> anzeigen;
 
     public Anbieter(String benutzername, String email, String passwort) {
+
         this.benutzername = benutzername;
         this.email = email;
         this.passwort = passwort;
+
         this.anzeigen = new ArrayList<>();
     }
 
-    public boolean passwortPrüfen(String eingegebenesPasswort){
+    public boolean passwortPruefen(String eingegebenesPasswort) {
+
         return this.passwort.equals(eingegebenesPasswort);
+
+    }
+
+    // Getter
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    public String getBenutzername() {
         return benutzername;
     }
 
@@ -40,11 +44,21 @@ public class Anbieter {
         return passwort;
     }
 
-    public void setName(String name) {
+    public ArrayList<Anzeige> getAnzeigen() {
+        return anzeigen;
+    }
+
+    // Setter
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBenutzername(String benutzername) {
         this.benutzername = benutzername;
     }
 
-    public void setEmail(String Email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -52,57 +66,16 @@ public class Anbieter {
         this.passwort = passwort;
     }
 
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
+    public void setAnzeigen(ArrayList<Anzeige> anzeigen) {
+        this.anzeigen = anzeigen;
     }
 
+    @Override
+    public String toString() {
+        return "Anbieter{" +
+                "id=" + id +
+                ", benutzername='" + benutzername + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
-
-
-/*
-public class Anbieter{
-
-    private String name;
-    private String passwort;
-    private ArrayList<Anzeige> anzeigen;
-
-
-    public Anbieter(String name, String passwort)
-    {
-        this.name = name;
-        this.passwort = passwort;
-
-    }
-
-
-    public void datenAusgeben(){
-        System.out.println("Name: " + name);
-        System.out.println("Passwort: " + passwort);
-        System.out.println("Anbieter: " + Anbieter);
-    }
-
-    public boolean registrieren(String name, String passwort) {
-        if(this.name.equals(name)) {
-            System.out.println("Name bereits vergeben");
-            return false;
-
-        }
-        else {
-            System.out.println("Registrierung erfolgreich");
-            return true;
-        }
-
-    }
-
-    public boolean login(String name, String passwort){
-        if(this.name.equals(name) && this.passwort.equals(passwort)){
-            System.out.println("Login erfolgreich");
-            return true;
-        }
-        else{
-            System.out.println("Ungültiger Name oder Passwort");
-            return false;
-        }
-    }
-
-}*/

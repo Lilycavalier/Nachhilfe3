@@ -1,8 +1,10 @@
 package org.nachhilfeplattform.app;
 
 import org.nachhilfeplattform.database.AnbieterDAO;
+import org.nachhilfeplattform.database.AnzeigeDAO;
 import org.nachhilfeplattform.database.DatabaseInitializer;
 import org.nachhilfeplattform.model.Anbieter;
+import org.nachhilfeplattform.model.Anzeige;
 import org.nachhilfeplattform.view.LoginFrame;
 import org.nachhilfeplattform.view.HomeFrame;
 
@@ -12,12 +14,22 @@ public class Main {
 
         DatabaseInitializer.createTables();
         new LoginFrame();
-        AnbieterDAO dao = new AnbieterDAO();
+        AnbieterDAO anbieterDAO = new AnbieterDAO();
 
-        Anbieter lena =
+        Anbieter jessy =
                 new Anbieter("Jessy", "jessy@mail.de", "1234");
 
-        dao.AnbieterSpeichern(lena);
+        anbieterDAO.AnbieterSpeichern(jessy);
+        AnzeigeDAO anzeigeDAO = new AnzeigeDAO();
+
+        for (Anzeige a : anzeigeDAO.getAlleAnzeigen()) {
+
+            System.out.println("Fach: " + a.getFach());
+            System.out.println("Klassenstufe: " + a.getKlassenstufe());
+            System.out.println("Zeit: " + a.getZeit());
+            System.out.println("Beschreibung: " + a.getBeschreibung());
+
+        }
 
     }
 }

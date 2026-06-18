@@ -10,7 +10,7 @@ public class AnbieterDAO {
     public void AnbieterSpeichern(Anbieter anbieter) {
 
         String sql =
-                "INSERT INTO anbieter(name, email, passwort) VALUES (?, ?, ?)";
+                "INSERT INTO anbieter(benutzername, email, passwort) VALUES (?, ?, ?)";
 
         try (
                 Connection conn = DatabaseConnection.getConnection();
