@@ -17,7 +17,7 @@ public class AnbieterDAO {
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
-            stmt.setString(1, anbieter.getName());
+            stmt.setString(1, anbieter.getBenutzername());
             stmt.setString(2, anbieter.getEmail());
             stmt.setString(3, anbieter.getPasswort());
 
