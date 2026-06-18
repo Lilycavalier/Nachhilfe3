@@ -53,4 +53,26 @@ public class AnbieterDAO {
             return false;
         }
     }
+
+    public boolean emailExistiert(String email) {
+
+        String sql = "SELECT * FROM anbieter WHERE email = ?";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
