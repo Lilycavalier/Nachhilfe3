@@ -9,18 +9,24 @@ public class Anzeige {
     private String zeit;
     private String beschreibung;
 
-    public Anzeige(
-            int anbieterId,
-            String klassenstufe,
-            String fach,
-            String zeit,
-            String beschreibung) {
+    public Anzeige(int id,
+                   int anbieterId,
+                   String klassenstufe,
+                   String fach,
+                   String zeit,
+                   String beschreibung) {
 
+        this.id = id;
         this.anbieterId = anbieterId;
         this.klassenstufe = klassenstufe;
         this.fach = fach;
         this.zeit = zeit;
         this.beschreibung = beschreibung;
+    }
+
+    // Getter
+    public int getId() {
+        return id;
     }
 
     public int getAnbieterId() {
@@ -41,5 +47,30 @@ public class Anzeige {
 
     public String getBeschreibung() {
         return beschreibung;
+    }
+
+    // Setter
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAnbieterId(int anbieterId) {
+        this.anbieterId = anbieterId;
+    }
+
+    public void setKlassenstufe(String klassenstufe) {
+        this.klassenstufe = klassenstufe;
+    }
+
+    public void setFach(String fach) {
+        this.fach = fach;
+    }
+
+    public void setZeit(String zeit) {
+        this.zeit = zeit;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
     }
 }
