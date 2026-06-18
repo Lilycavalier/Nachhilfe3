@@ -148,4 +148,59 @@ public class AnzeigeDAO {
             e.printStackTrace();
         }
     }
+
+    //tag fehlt noch
+    public List<Anzeige> filter(String fach, String klassenstufe, String zeit) {
+
+    List<Anzeige> anzeigen = new ArrayList<>();
+
+    StringBuilder sql = new StringBuilder("SELECT * FROM anzeigen WHERE 1=1");
+
+    List<String> params = new ArrayList<>();
+
+    if (fach != null && !fach.isEmpty()) {
+        sql.append(" AND fach = ?");
+        params.add(fach);
+    }
+
+    if (klassenstufe != null && !klassenstufe.isEmpty()) {
+        sql.append(" AND klassenstufe = ?");
+        params.add(klassenstufe);
+    }
+
+    if (zeit != null && !zeit.isEmpty()) {
+        sql.append(" AND zeit = ?");
+        params.add(zeit);
+    }
+
+    try (
+            Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql.toString())
+    ) {
+
+        // Parameter dynamisch setzen
+        for (int i = 0; i < params.size(); i++) {
+            stmt.setString(i + 1, params.get(i));
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+
+            anzeigen.add(new Anzeige(
+                    rs.getInt("id"),
+                    rs.getInt("anbieter_id"),
+                    rs.getString("klassenstufe"),
+                    rs.getString("fach"),
+                    rs.getString("zeit"),
+                    rs.getString("beschreibung")
+            ));
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return anzeigen;
+}
 }
