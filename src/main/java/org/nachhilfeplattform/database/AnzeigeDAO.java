@@ -35,13 +35,7 @@ public class AnzeigeDAO {
 
            ResultSet rs = stmt.executeQuery();
            if (rs.next()) {
-                Anzeige anzeige = new Anzeige();
-                anzeige.setanbieter_id(rs.getInt("anbieter_id"));
-                anzeige.setklassenstufe(rs.getString("klassenstufe"));
-                anzeige.setfach(rs.getString("fach"));
-                anzeige.setzeit(rs.getString("zeit"));
-                anzeige.setbeschreibung(rs.getString("beschreibung"));
-
+                Anzeige anzeige = new Anzeige(rs.getInt("anbieter_id"), rs.getString("klassenstufe"), rs.getString("fach"), rs.getString("zeit"), rs.getString("beschreibung"));
                 return anzeige;
            }
         } catch (Exception e) {
