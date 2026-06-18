@@ -13,24 +13,12 @@ public class Main {
     public static void main(String[] args) {
 
         DatabaseInitializer.createTables();
-        new LoginFrame();
-        AnbieterDAO anbieterDAO = new AnbieterDAO();
 
-        Anbieter jessy =
-                new Anbieter("Jessy", "jessy@mail.de", "1234");
+        System.out.println("Start GUI");
 
-        anbieterDAO.AnbieterSpeichern(jessy);
-        AnzeigeDAO anzeigeDAO = new AnzeigeDAO();
-
-        for (Anzeige a : anzeigeDAO.getAlleAnzeigen()) {
-
-            System.out.println("Fach: " + a.getFach());
-            System.out.println("Klassenstufe: " + a.getKlassenstufe());
-            System.out.println("Zeit: " + a.getZeit());
-            System.out.println("Beschreibung: " + a.getBeschreibung());
-
-        }
-
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new LoginFrame();
+        });
     }
 }
 
@@ -49,3 +37,25 @@ C:\Users\jessy\OneDrive\Desktop\Informatik\Nachhilfe3\src\main\java>java org.nac
 
 C:\Users\jessy\OneDrive\Desktop\Informatik\Nachhilfe3\src\main\java>
 */
+
+/*
+Anbieter jessy =
+                new Anbieter("Jessy", "jessy@mail.de", "1234");
+
+        anbieterDAO.AnbieterSpeichern(jessy);
+        Anzeige anzeige = new Anzeige(
+                1,
+                1,
+                "Q12",
+                "Mathematik",
+                "Dienstag 16-18 Uhr",
+                "Ich gebe Mathe-Nachhilfe"
+        );
+
+        anzeigeDAO.AnzeigeSpeichern(anzeige);
+
+
+if (!dao.emailExistiert(email)) {
+    dao.AnbieterSpeichern(anbieter);
+}
+ */
