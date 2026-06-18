@@ -44,6 +44,30 @@ public class LoginFrame extends JFrame {
         ok.setBounds(155, 230, 70, 30);
         add(ok);
 
+        ok.addActionListener(e -> {
+
+     String eingegebeneEmail = email.getText();
+     String eingegebenesPasswort =
+     new String(passwort.getPassword());
+
+     AnbieterDAO dao = new AnbieterDAO();
+
+     boolean erfolgreich =
+     dao.login(eingegebeneEmail, eingegebenesPasswort);
+
+     if (erfolgreich) {
+
+     dispose();
+
+     new HomeFrame();
+
+     } else {
+
+     fehler.setVisible(true);
+
+     }
+     });
+     
         setVisible(true);
     }
 }
