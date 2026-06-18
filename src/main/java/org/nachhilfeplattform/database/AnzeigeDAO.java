@@ -107,4 +107,35 @@ public class AnzeigeDAO {
 
         return anzeigen;
     }
+
+    public void updateAnzeige(int id, Anzeige anzeige) {
+        String sql = """
+            UPDATE anzeige
+            SET klassenstufe = ?, fach = ?, zeit = ?, beschreibung = ?
+            WHERE id = ?
+        """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, anzeige.getklassenstufe());
+            stmt.setString(2, anzeige.getfach());
+            stmt.setString(3, anzeige.getzeit());
+            stmt.setString(4, anzeige.getbeschreibung());
+            stmt.setInt(5, id);
+
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAnzeige(int id) {
+        String sql = "DELETE FROM anzeige WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
