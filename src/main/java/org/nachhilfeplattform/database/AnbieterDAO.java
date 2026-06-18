@@ -56,7 +56,7 @@ public class AnbieterDAO {
 
     public boolean emailExistiert(String email) {
 
-        String sql = "SELECT * FROM anbieter WHERE email = ?";
+        String sql = "SELECT 1 FROM anbieter WHERE email = ?";
 
         try (
                 Connection conn = DatabaseConnection.getConnection();
@@ -74,5 +74,22 @@ public class AnbieterDAO {
         }
 
         return false;
+    }
+
+    public void deleteAnbieter(int id) {
+
+        String sql = "DELETE FROM anbieter WHERE id = ?";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

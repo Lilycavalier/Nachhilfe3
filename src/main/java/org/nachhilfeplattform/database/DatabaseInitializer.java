@@ -26,7 +26,7 @@ public class DatabaseInitializer {
                     fach TEXT NOT NULL,
                     zeit TEXT NOT NULL,
                     beschreibung TEXT NOT NULL,
-                    FOREIGN KEY (anbieter_id) REFERENCES anbieter(id)
+                    FOREIGN KEY (anbieter_id) REFERENCES anbieter(id) ON DELETE CASCADE
                 );
                 """;
 
@@ -34,6 +34,7 @@ public class DatabaseInitializer {
                 Connection conn = DatabaseConnection.getConnection();
                 Statement stmt = conn.createStatement()
         ) {
+            stmt.execute("PRAGMA foreign_keys = ON;");
             stmt.execute(sqlAnbieter);
             stmt.execute(sqlAnzeigen);
             System.out.println("Tabellen erstellt!");
