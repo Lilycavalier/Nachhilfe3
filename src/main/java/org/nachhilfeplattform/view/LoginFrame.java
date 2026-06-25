@@ -1,6 +1,7 @@
 package org.nachhilfeplattform.view;
 
 import org.nachhilfeplattform.database.AnbieterDAO;
+import org.nachhilfeplattform.model.Anbieter;
 
 import javax.swing.*;
 import java.awt.Font;
@@ -58,15 +59,14 @@ public class LoginFrame extends JFrame {
 
             AnbieterDAO dao = new AnbieterDAO();
 
-            boolean erfolgreich = dao.login(eingegebeneEmail, eingegebenesPasswort);
+            Anbieter anbieter = dao.login(eingegebeneEmail, eingegebenesPasswort);
 
-            if (erfolgreich) {
+            if (anbieter != null) {
 
                 dispose();
-                new AnbieterFrame();
+                new AnbieterFrame(anbieter);
 
             } else {
-
                 fehler.setVisible(true);
             }
         });

@@ -7,6 +7,7 @@ import org.nachhilfeplattform.model.Anbieter;
 import org.nachhilfeplattform.model.Anzeige;
 import org.nachhilfeplattform.view.LoginFrame;
 import org.nachhilfeplattform.view.HomeFrame;
+import org.nachhilfeplattform.view.AnbieterFrame;
 
 public class Main {
 
@@ -15,6 +16,15 @@ public class Main {
         DatabaseInitializer.createTables();
 
         System.out.println("Start GUI");
+
+        //hihi
+        AnbieterDAO anbieterDAO = new AnbieterDAO();
+        Anbieter lily =
+                new Anbieter("Lily", "lily@mail.de", "1234");
+
+        if (!anbieterDAO.emailExistiert("lily@mail.de")) {
+            anbieterDAO.AnbieterSpeichern(lily);
+        };
 
         javax.swing.SwingUtilities.invokeLater(() -> {
             new HomeFrame();
