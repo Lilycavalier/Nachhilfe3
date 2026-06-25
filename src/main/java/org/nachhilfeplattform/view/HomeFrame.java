@@ -20,14 +20,27 @@ public class HomeFrame extends JFrame {
         // TITEL
         // =========================
 
+        // =========================
+// TITEL + LOGIN BUTTON
+// =========================
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+
         JLabel titel = new JLabel("Nachhilfe SMÜ");
         titel.setFont(new Font("Arial", Font.BOLD, 30));
         titel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JPanel titelPanel = new JPanel();
-        titelPanel.add(titel);
+        JButton loginButton = new JButton("Anbieter Login");
 
-        add(titelPanel, BorderLayout.NORTH);
+        loginButton.addActionListener(e -> {
+            dispose();
+            new LoginFrame();
+        });
+
+        topPanel.add(titel, BorderLayout.CENTER);
+        topPanel.add(loginButton, BorderLayout.EAST);
+
+        add(topPanel, BorderLayout.NORTH);
 
         // =========================
         // FILTER
@@ -78,9 +91,7 @@ public class HomeFrame extends JFrame {
         );
 
         anzeigenPanel.setBorder(
-                BorderFactory.createEmptyBorder(
-                        10, 10, 10, 10
-                )
+                BorderFactory.createTitledBorder("Anzeigen")
         );
 
         // Testdaten

@@ -17,7 +17,7 @@ public class Main {
         System.out.println("Start GUI");
 
         javax.swing.SwingUtilities.invokeLater(() -> {
-            new LoginFrame();
+            new HomeFrame();
         });
     }
 }

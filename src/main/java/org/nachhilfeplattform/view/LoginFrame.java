@@ -63,7 +63,7 @@ public class LoginFrame extends JFrame {
             if (erfolgreich) {
 
                 dispose();
-                new HomeFrame();
+                new AnbieterFrame();
 
             } else {
 
