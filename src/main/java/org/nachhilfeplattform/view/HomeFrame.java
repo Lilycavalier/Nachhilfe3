@@ -48,15 +48,19 @@ public class HomeFrame extends JFrame {
 
         filterPanel.add(Box.createVerticalStrut(10));
 
-        ArrowToggleExample klassenPanel =
-                new ArrowToggleExample();
+        AkkordionJahrgangstufe klassenPanel = new AkkordionJahrgangstufe();
 
-        AkkordionFach fachPanel =
-                new AkkordionFach();
+        AkkordionFach fachPanel = new AkkordionFach();
+
+        AkkordionStunde stundePanel = new AkkordionStunde();
+
+        AkkordionTag tagPanel = new AkkordionTag();
 
         filterPanel.add(klassenPanel);
         filterPanel.add(Box.createVerticalStrut(15));
         filterPanel.add(fachPanel);
+        filterPanel.add(stundePanel);
+        filterPanel.add(tagPanel);
 
         add(filterPanel, BorderLayout.WEST);
 

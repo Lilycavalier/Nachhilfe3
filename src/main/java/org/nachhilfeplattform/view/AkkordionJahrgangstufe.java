@@ -2,17 +2,15 @@ package org.nachhilfeplattform.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ArrowToggleExample extends JPanel{
+public class AkkordionJahrgangstufe extends JPanel{
 
     private boolean expanded = false;
     private JButton arrowButton;
     private JPanel contentPanel;
     private JButton closeButton;
 
-    public ArrowToggleExample(){
+    public AkkordionJahrgangstufe(){
         setLayout(new BorderLayout());
 
         arrowButton = new JButton("+");
@@ -101,7 +99,7 @@ public class ArrowToggleExample extends JPanel{
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ArrowToggleExample::new);
+        SwingUtilities.invokeLater(AkkordionJahrgangstufe::new);
     } 
 }
 

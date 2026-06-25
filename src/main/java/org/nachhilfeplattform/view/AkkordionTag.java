@@ -2,8 +2,6 @@ package org.nachhilfeplattform.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AkkordionTag extends JPanel{
 
@@ -79,7 +77,7 @@ public class AkkordionTag extends JPanel{
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ArrowToggleExample::new);
+        SwingUtilities.invokeLater(AkkordionJahrgangstufe::new);
     }
 
         
