@@ -90,9 +90,9 @@ public class AkkordionFach extends JPanel{
         add(contentPanel, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ArrowToggleExample::new);
-    }
+    // public static void main(String[] args) {
+    //    SwingUtilities.invokeLater(ArrowToggleExample::new);
+    //}
 
         
     }

@@ -2,73 +2,143 @@ package org.nachhilfeplattform.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomeFrame extends JFrame {
 
+    private JPanel anzeigenPanel;
 
     public HomeFrame() {
-        
+
         setTitle("Nachhilfe SMÜ");
-        setSize(1000, 1000);
+        setSize(1000, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
         setLocationRelativeTo(null);
 
-        //JLabel sucheLabel = new JLabel("Suche:");
-        //sucheLabel.setBounds(30, 40, 50, 30);
-        //add(sucheLabel);
+        setLayout(new BorderLayout(10, 10));
 
-        //JTextField sucheField = new JTextField();
-        //sucheField.setBounds(80, 40, 250, 30);
-        //add(sucheField);
+        // =========================
+        // TITEL
+        // =========================
 
-        //JButton suchenButton = new JButton("OK");
-        //suchenButton.setBounds(350, 40, 100, 30);
-        //add(suchenButton);
+        JLabel titel = new JLabel("Nachhilfe SMÜ");
+        titel.setFont(new Font("Arial", Font.BOLD, 30));
+        titel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel filter = new JLabel("Filter:");
-        filter.setBounds(10, 40, 200, 30);
-        filter.setFont(new Font("Arial", Font.PLAIN, 22));
-        add(filter);
+        JPanel titelPanel = new JPanel();
+        titelPanel.add(titel);
 
-        ArrowToggleExample togglePanel = new ArrowToggleExample();
-        togglePanel.setBounds(10, 60, 200, 250);
-        add(togglePanel);
+        add(titelPanel, BorderLayout.NORTH);
 
-        AkkordionFach togglePanelFach = new AkkordionFach();
-        togglePanelFach.setBounds(210, 60, 200, 250);
-        add(togglePanelFach);
+        // =========================
+        // FILTER
+        // =========================
 
-        AkkordionTag togglePanelTag = new AkkordionTag();
-        togglePanelTag.setBounds(410, 60, 200, 250);
-        add(togglePanelTag);
+        JPanel filterPanel = new JPanel();
+        filterPanel.setPreferredSize(new Dimension(250, 0));
+        filterPanel.setBorder(
+                BorderFactory.createTitledBorder("Filter")
+        );
 
-        AkkordionStunde togglePanelStunde = new AkkordionStunde();
-        togglePanelStunde.setBounds(610, 60, 200, 250);
-        add(togglePanelStunde);
+        filterPanel.setLayout(
+                new BoxLayout(
+                        filterPanel,
+                        BoxLayout.Y_AXIS
+                )
+        );
 
-        JButton closeButton = new JButton("OK");
-        closeButton.setBounds(850, 65, 60, 30);
-        add(closeButton);
+        filterPanel.add(Box.createVerticalStrut(10));
 
-        JLabel anzeige = new JLabel("6.Klasse; Latein; Montag; 8.Stunde; Hannah");
-        anzeige.setBounds(10, 350, 600, 30);
-        anzeige.setFont(new Font("Arial", Font.PLAIN, 15));
-        add(anzeige);
+        ArrowToggleExample klassenPanel =
+                new ArrowToggleExample();
 
-        JButton Buchen = new JButton("Details");
-        Buchen.setBounds(350, 350, 80, 30);
-        add(Buchen);
+        AkkordionFach fachPanel =
+                new AkkordionFach();
 
-        JLabel anzeige = new JLabel("Anzeigen:");
-        anzeige.setBounds(10, 330, 200, 30);
-        anzeige.setFont(new Font("Arial", Font.PLAIN, 22));
-        add(anzeige);
+        filterPanel.add(klassenPanel);
+        filterPanel.add(Box.createVerticalStrut(15));
+        filterPanel.add(fachPanel);
 
+        add(filterPanel, BorderLayout.WEST);
+
+        // =========================
+        // ANZEIGENLISTE
+        // =========================
+
+        anzeigenPanel = new JPanel();
+
+        anzeigenPanel.setLayout(
+                new BoxLayout(
+                        anzeigenPanel,
+                        BoxLayout.Y_AXIS
+                )
+        );
+
+        anzeigenPanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                        10, 10, 10, 10
+                )
+        );
+
+        // Testdaten
+        addAnzeige(
+                "Mathematik",
+                "Q12",
+                "Dienstag 16-18 Uhr",
+                "Ich gebe Mathe-Nachhilfe."
+        );
+
+        addAnzeige(
+                "Informatik",
+                "Q11",
+                "Montag 15-17 Uhr",
+                "Hilfe bei Java und Programmierung."
+        );
+
+        JScrollPane scrollPane =
+                new JScrollPane(anzeigenPanel);
+
+        add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
+    }
+
+    /**
+     * Fügt eine Anzeige zur Liste hinzu
+     */
+    private void addAnzeige(
+            String fach,
+            String klassenstufe,
+            String zeit,
+            String beschreibung) {
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        panel.setBorder(
+                BorderFactory.createTitledBorder(fach)
+        );
+
+        JTextArea info = new JTextArea(
+                "Klassenstufe: " + klassenstufe +
+                        "\nZeit: " + zeit +
+                        "\nBeschreibung: " + beschreibung
+        );
+
+        info.setEditable(false);
+        info.setLineWrap(true);
+        info.setWrapStyleWord(true);
+
+        panel.add(info, BorderLayout.CENTER);
+
+        panel.setMaximumSize(
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        120
+                )
+        );
+
+        anzeigenPanel.add(panel);
+        anzeigenPanel.add(Box.createVerticalStrut(10));
     }
 }
 

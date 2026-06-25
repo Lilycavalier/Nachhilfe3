@@ -11,7 +11,9 @@ public class LoginFrame extends JFrame {
     public LoginFrame() {
 
         setTitle("Nachhilfe SMÜ");
-        setSize(400, 400);
+        setSize(400,400);
+
+        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
