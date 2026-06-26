@@ -4,8 +4,6 @@ import org.nachhilfeplattform.database.AnzeigeDAO;
 import org.nachhilfeplattform.model.Anzeige;
 import org.nachhilfeplattform.util.AkkordeonFach;
 import org.nachhilfeplattform.util.AkkordeonJahrgangstufe;
-import org.nachhilfeplattform.util.AkkordeonStunde;
-import org.nachhilfeplattform.util.AkkordeonTag;
 import java.util.List;
 
 import javax.swing.*;
@@ -64,20 +62,12 @@ public class HomeFrame extends JFrame {
 
         AkkordeonJahrgangstufe klassenPanel = new AkkordeonJahrgangstufe();
         AkkordeonFach fachPanel = new AkkordeonFach();
-        AkkordeonStunde stundePanel = new AkkordeonStunde();
-        AkkordeonTag tagPanel = new AkkordeonTag();
 
         filterContent.add(klassenPanel);
         filterContent.add(Box.createVerticalStrut(10));
 
         filterContent.add(fachPanel);
         filterContent.add(Box.createVerticalStrut(10));
-
-        filterContent.add(stundePanel);
-        filterContent.add(Box.createVerticalStrut(10));
-
-        filterContent.add(tagPanel);
-        filterContent.add(Box.createVerticalStrut(20));
 
         // Alles nach oben schieben
         filterPanel.add(Box.createVerticalGlue());
@@ -89,50 +79,7 @@ public class HomeFrame extends JFrame {
 
         filterPanel.add(filterScroll, BorderLayout.CENTER);
 
-        JButton filterButton = new JButton("Filter anwenden");
-
-
-
-
-        // filter anwenden
-        filterButton.addActionListener(e -> {
-
-            List<String> faecher = fachPanel.getAusgewaehlteFaecher();
-            List<String> klassen = klassenPanel.getAusgewaehlteKlassen();
-            List<String> tage = tagPanel.getAusgewaehlteTage();
-            List<String> zeiten = stundePanel.getAusgewaehlteZeiten();
-
-            AnzeigeDAO dao = new AnzeigeDAO();
-
-            List<Anzeige> ergebnis = dao.filterAnzeigen(
-                    faecher,
-                    klassen,
-                    tage,
-                    zeiten
-            );
-
-            anzeigenPanel.removeAll();
-
-            for (Anzeige a : ergebnis) {
-                addAnzeige(
-                        a.getFach(),
-                        a.getKlassenstufe(),
-                        a.getZeit(),
-                        a.getBeschreibung()
-                );
-            }
-
-            anzeigenPanel.revalidate();
-            anzeigenPanel.repaint();
-        });
-
-
-
-
-
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(filterButton);
+        JPanel buttonPanel = getJPanel(fachPanel, klassenPanel);
         filterPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(filterPanel, BorderLayout.WEST);
@@ -161,6 +108,42 @@ public class HomeFrame extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
+    }
+
+    private JPanel getJPanel(AkkordeonFach fachPanel, AkkordeonJahrgangstufe klassenPanel) {
+        JButton filterButton = new JButton("Filter anwenden");
+
+        // filter anwenden
+        filterButton.addActionListener(e -> {
+
+            List<String> faecher = fachPanel.getAusgewaehlteFaecher();
+            List<String> klassen = klassenPanel.getAusgewaehlteKlassen();
+
+            AnzeigeDAO dao = new AnzeigeDAO();
+
+            List<Anzeige> ergebnis = dao.filterAnzeigen(
+                    faecher,
+                    klassen
+            );
+
+            anzeigenPanel.removeAll();
+
+            for (Anzeige a : ergebnis) {
+                addAnzeige(
+                        a.getFach(),
+                        a.getKlassenstufe(),
+                        a.getZeit(),
+                        a.getBeschreibung()
+                );
+            }
+
+            anzeigenPanel.revalidate();
+            anzeigenPanel.repaint();
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(filterButton);
+        return buttonPanel;
     }
 
     private void ladeAlleAnzeigen() {

@@ -180,7 +180,7 @@ public class AnzeigeDAO {
         }
     }
 
-    public List<Anzeige> filterAnzeigen(List<String> faecher, List<String> klassen, List<String> tage, List<String> zeiten) {
+    public List<Anzeige> filterAnzeigen(List<String> faecher, List<String> klassen) {
 
         List<Anzeige> anzeigen = new ArrayList<>();
 
@@ -210,40 +210,6 @@ public class AnzeigeDAO {
             sql.append(")");
         }
 
-        if (!klassen.isEmpty()) {
-
-            sql.append(" AND klassenstufe IN (");
-
-            for (int i = 0; i < klassen.size(); i++) {
-                sql.append("?");
-                if (i < klassen.size() - 1) sql.append(",");
-            }
-
-            sql.append(")");
-        }
-
-        if (!tage.isEmpty()) {
-            sql.append(" AND tag IN (...)");
-
-            for (int i = 0; i < tage.size(); i++) {
-                sql.append("?");
-                if (i < tage.size() - 1) sql.append(",");
-            }
-
-            sql.append(")");
-        }
-
-        if (!zeiten.isEmpty()) {
-            sql.append(" AND zeit IN (...)");
-
-            for (int i = 0; i < zeiten.size(); i++) {
-                sql.append("?");
-                if (i < zeiten.size() - 1) sql.append(",");
-            }
-
-            sql.append(")");
-        }
-
         try (
                 Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql.toString())
@@ -257,14 +223,6 @@ public class AnzeigeDAO {
 
             for (String k : klassen) {
                 stmt.setString(index++, k);
-            }
-
-            for (String t : tage) {
-                stmt.setString(index++, t);
-            }
-
-            for (String z : zeiten) {
-                stmt.setString(index++, z);
             }
 
             ResultSet rs = stmt.executeQuery();

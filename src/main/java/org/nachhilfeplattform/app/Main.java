@@ -15,13 +15,13 @@ public class Main {
 
         DatabaseInitializer.createTables();
 
-        System.out.println("Start GUI");
-
         javax.swing.SwingUtilities.invokeLater(() -> {
             new HomeFrame();
         });
     }
 }
+
+//registrieren fehlt noch!!
 
 //java org.nachhilfeplattform.app.Main
 /*
@@ -40,10 +40,23 @@ C:\Users\jessy\OneDrive\Desktop\Informatik\Nachhilfe3\src\main\java>
 */
 
 /*
-Anbieter jessy =
+        AnbieterDAO anbieterDAO = new AnbieterDAO();
+        AnzeigeDAO anzeigeDAO = new AnzeigeDAO();
+
+        Anbieter lily =
+                new Anbieter("Lily", "lily@mail.de", "1234");
+
+        if (!anbieterDAO.emailExistiert("lily@mail.de")) {
+            anbieterDAO.AnbieterSpeichern(lily);
+        };
+
+        Anbieter jessy =
                 new Anbieter("Jessy", "jessy@mail.de", "1234");
 
-        anbieterDAO.AnbieterSpeichern(jessy);
+        if (!anbieterDAO.emailExistiert("jessy@mail.de")) {
+            anbieterDAO.AnbieterSpeichern(jessy);
+        };
+
         Anzeige anzeige = new Anzeige(
                 1,
                 1,
@@ -53,10 +66,9 @@ Anbieter jessy =
                 "Ich gebe Mathe-Nachhilfe"
         );
 
-        anzeigeDAO.AnzeigeSpeichern(anzeige);
 
-
-if (!dao.emailExistiert(email)) {
-    dao.AnbieterSpeichern(anbieter);
+        wichtig immer zu prüfen ob Konto schon existiert!!
+        if (!dao.emailExistiert(email)) {
+            dao.AnbieterSpeichern(anbieter);
 }
  */
