@@ -7,6 +7,7 @@ public class Anzeige {
     private String klassenstufe;
     private String fach;
     private String zeit;
+    private String tag;
     private String beschreibung;
 
     public Anzeige(int id,

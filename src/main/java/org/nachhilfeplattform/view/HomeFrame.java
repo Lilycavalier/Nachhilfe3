@@ -6,6 +6,7 @@ import org.nachhilfeplattform.util.AkkordeonFach;
 import org.nachhilfeplattform.util.AkkordeonJahrgangstufe;
 import org.nachhilfeplattform.util.AkkordeonStunde;
 import org.nachhilfeplattform.util.AkkordeonTag;
+import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,6 +90,47 @@ public class HomeFrame extends JFrame {
         filterPanel.add(filterScroll, BorderLayout.CENTER);
 
         JButton filterButton = new JButton("Filter anwenden");
+
+
+
+
+        // filter anwenden
+        filterButton.addActionListener(e -> {
+
+            List<String> faecher = fachPanel.getAusgewaehlteFaecher();
+            List<String> klassen = klassenPanel.getAusgewaehlteKlassen();
+            List<String> tage = tagPanel.getAusgewaehlteTage();
+            List<String> zeiten = stundePanel.getAusgewaehlteZeiten();
+
+            AnzeigeDAO dao = new AnzeigeDAO();
+
+            List<Anzeige> ergebnis = dao.filterAnzeigen(
+                    faecher,
+                    klassen,
+                    tage,
+                    zeiten
+            );
+
+            anzeigenPanel.removeAll();
+
+            for (Anzeige a : ergebnis) {
+                addAnzeige(
+                        a.getFach(),
+                        a.getKlassenstufe(),
+                        a.getZeit(),
+                        a.getBeschreibung()
+                );
+            }
+
+            anzeigenPanel.revalidate();
+            anzeigenPanel.repaint();
+        });
+
+
+
+
+
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(filterButton);
         filterPanel.add(buttonPanel, BorderLayout.SOUTH);

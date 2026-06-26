@@ -180,6 +180,118 @@ public class AnzeigeDAO {
         }
     }
 
+    public List<Anzeige> filterAnzeigen(List<String> faecher, List<String> klassen, List<String> tage, List<String> zeiten) {
+
+        List<Anzeige> anzeigen = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("SELECT * FROM anzeigen WHERE 1=1");
+
+        if (!faecher.isEmpty()) {
+
+            sql.append(" AND fach IN (");
+
+            for (int i = 0; i < faecher.size(); i++) {
+                sql.append("?");
+                if (i < faecher.size() - 1) sql.append(",");
+            }
+
+            sql.append(")");
+        }
+
+        if (!klassen.isEmpty()) {
+
+            sql.append(" AND klassenstufe IN (");
+
+            for (int i = 0; i < klassen.size(); i++) {
+                sql.append("?");
+                if (i < klassen.size() - 1) sql.append(",");
+            }
+
+            sql.append(")");
+        }
+
+        if (!klassen.isEmpty()) {
+
+            sql.append(" AND klassenstufe IN (");
+
+            for (int i = 0; i < klassen.size(); i++) {
+                sql.append("?");
+                if (i < klassen.size() - 1) sql.append(",");
+            }
+
+            sql.append(")");
+        }
+
+        if (!tage.isEmpty()) {
+            sql.append(" AND tag IN (...)");
+
+            for (int i = 0; i < tage.size(); i++) {
+                sql.append("?");
+                if (i < tage.size() - 1) sql.append(",");
+            }
+
+            sql.append(")");
+        }
+
+        if (!zeiten.isEmpty()) {
+            sql.append(" AND zeit IN (...)");
+
+            for (int i = 0; i < zeiten.size(); i++) {
+                sql.append("?");
+                if (i < zeiten.size() - 1) sql.append(",");
+            }
+
+            sql.append(")");
+        }
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql.toString())
+        ) {
+
+            int index = 1;
+
+            for (String f : faecher) {
+                stmt.setString(index++, f);
+            }
+
+            for (String k : klassen) {
+                stmt.setString(index++, k);
+            }
+
+            for (String t : tage) {
+                stmt.setString(index++, t);
+            }
+
+            for (String z : zeiten) {
+                stmt.setString(index++, z);
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                anzeigen.add(new Anzeige(
+                        rs.getInt("id"),
+                        rs.getInt("anbieter_id"),
+                        rs.getString("klassenstufe"),
+                        rs.getString("fach"),
+                        rs.getString("zeit"),
+                        rs.getString("beschreibung")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return anzeigen;
+    }
+
+
+
+
+
+
     //tag fehlt noch
     public List<Anzeige> filter(String fach, String klassenstufe, String zeit) {
 
