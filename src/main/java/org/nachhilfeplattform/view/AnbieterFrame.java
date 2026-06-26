@@ -48,11 +48,25 @@ public class AnbieterFrame extends JFrame {
 
         // INHALT
         JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(
+            new BoxLayout(
+                contentPanel,
+                BoxLayout.Y_AXIS
+            )
+        );
         contentPanel.setBorder(
                 BorderFactory.createTitledBorder("Inhalt")
         );
-        JLabel contentLabel = new JLabel("Helluuu");
+        JLabel contentLabel = new JLabel("");
+
+        contentLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        contentLabel.setMaximumSize(
+            new Dimension(Integer.MAX_VALUE, contentLabel.getPreferredSize().height)
+        );
+
         contentPanel.add(contentLabel);
+        contentPanel.add(contentLabel);
+        contentPanel.add(Box.createVerticalStrut(10));
         
         //"buttons"
         JButton anzeigenButton = new JButton("Meine Anzeigen");
@@ -66,20 +80,33 @@ public class AnbieterFrame extends JFrame {
         anzeigenButton.setContentAreaFilled(false);
         anzeigenButton.setOpaque(true);
         anzeigenButton.setBorderPainted(false);
-        //hover effekte
+
+        //ausgewählt effekte
+        setActiveButton(anzeigenButton, erstellenButton);
         anzeigenButton.addActionListener(e -> {
+            contentPanel.removeAll();
+
+            contentPanel.add(Box.createVerticalStrut(10));
             AnzeigeDAO dao = new AnzeigeDAO();
 
             List<Anzeige> anzeigen =
                     dao.getAlleAnzeigenAnbieter(aktueller.getId());
+            renderAnzeigen(anzeigen, contentPanel);
 
-            contentLabel.setText("Anzahl Anzeigen: " + anzeigen.size());
+            contentPanel.revalidate();
+            contentPanel.repaint();
 
             setActiveButton(anzeigenButton, erstellenButton);
         });
         
         erstellenButton.addActionListener(e -> {
+            contentPanel.removeAll();
+
             contentLabel.setText("Neue Anzeige erstellen");
+            contentPanel.add(contentLabel);
+
+            contentPanel.revalidate();
+            contentPanel.repaint();
             setActiveButton(erstellenButton, anzeigenButton);
         });
 
@@ -101,5 +128,47 @@ public class AnbieterFrame extends JFrame {
 
     private String meineAnzeigen(){
         return "";
+    }
+
+    public void renderAnzeigen(List<Anzeige> anzeigen, JPanel contentPanel){
+        for(int i=0; i<anzeigen.size(); i++){
+            displayAnzeige(anzeigen.get(i), contentPanel);
+        }
+    }
+
+    public void displayAnzeige(Anzeige anzeige, JPanel contentPanel ){
+        String fach = anzeige.getFach();
+        String klassenstufe = anzeige.getKlassenstufe();
+        String zeit = anzeige.getZeit();
+        String beschreibung = anzeige.getBeschreibung();
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        panel.setBorder(
+                BorderFactory.createTitledBorder(fach)
+        );
+
+        JTextArea info = new JTextArea(
+                "Klassenstufe: " + klassenstufe +
+                        "\nZeit: " + zeit +
+                        "\nBeschreibung: " + beschreibung
+        );
+
+        info.setEditable(false);
+        info.setLineWrap(true);
+        info.setWrapStyleWord(true);
+
+        panel.add(info, BorderLayout.CENTER);
+
+        panel.setMaximumSize(
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        120
+                )
+        );
+
+        contentPanel.add(panel);
+        contentPanel.add(Box.createVerticalStrut(10));
     }
 }
