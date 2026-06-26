@@ -71,30 +71,30 @@ public class AnzeigeDAO {
     }
 
     // Alle Anzeigen laden
-    public List<Anzeige> getAlleAnzeigen() {
+    public List<Anzeige> getAlleAnzeigen(int anbieterId) {
 
         List<Anzeige> anzeigen = new ArrayList<>();
 
-        String sql = "SELECT * FROM anzeigen";
+        String sql = "SELECT * FROM anzeigen WHERE anbieter_id = ?";
 
         try (
-                Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()
+            Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
-            while (rs.next()) {
+            stmt.setInt(1, anbieterId);
 
-                Anzeige anzeige = new Anzeige(
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                anzeigen.add(new Anzeige(
                         rs.getInt("id"),
                         rs.getInt("anbieter_id"),
                         rs.getString("klassenstufe"),
                         rs.getString("fach"),
                         rs.getString("zeit"),
                         rs.getString("beschreibung")
-                );
-
-                anzeigen.add(anzeige);
+                ));
             }
 
         } catch (Exception e) {
