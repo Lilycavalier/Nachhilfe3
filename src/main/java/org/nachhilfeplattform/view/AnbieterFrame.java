@@ -71,7 +71,7 @@ public class AnbieterFrame extends JFrame {
             AnzeigeDAO dao = new AnzeigeDAO();
 
             List<Anzeige> anzeigen =
-                    dao.getAlleAnzeigen(aktueller.getId());
+                    dao.getAlleAnzeigenAnbieter(aktueller.getId());
 
             contentLabel.setText("Anzahl Anzeigen: " + anzeigen.size());
 

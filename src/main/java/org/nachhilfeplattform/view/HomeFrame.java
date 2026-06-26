@@ -1,5 +1,7 @@
 package org.nachhilfeplattform.view;
 
+import org.nachhilfeplattform.database.AnzeigeDAO;
+import org.nachhilfeplattform.model.Anzeige;
 import org.nachhilfeplattform.util.AkkordeonFach;
 import org.nachhilfeplattform.util.AkkordeonJahrgangstufe;
 import org.nachhilfeplattform.util.AkkordeonStunde;
@@ -51,41 +53,47 @@ public class HomeFrame extends JFrame {
         // FILTER
         // =========================
 
-        JPanel filterPanel = new JPanel();
-        filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.Y_AXIS));
-        filterPanel.setBorder(
-                BorderFactory.createTitledBorder("Filter")
-        );
+        JPanel filterPanel = new JPanel(new BorderLayout());
+
+        filterPanel.setPreferredSize(new Dimension(230, 0));
+        filterPanel.setBorder(BorderFactory.createTitledBorder("Filter"));
+
+        JPanel filterContent = new JPanel();
+        filterContent.setLayout(new BoxLayout(filterContent, BoxLayout.Y_AXIS));
 
         AkkordeonJahrgangstufe klassenPanel = new AkkordeonJahrgangstufe();
         AkkordeonFach fachPanel = new AkkordeonFach();
         AkkordeonStunde stundePanel = new AkkordeonStunde();
         AkkordeonTag tagPanel = new AkkordeonTag();
 
-        filterPanel.add(klassenPanel);
-        filterPanel.add(Box.createVerticalStrut(10));
+        filterContent.add(klassenPanel);
+        filterContent.add(Box.createVerticalStrut(10));
 
-        filterPanel.add(fachPanel);
-        filterPanel.add(Box.createVerticalStrut(10));
+        filterContent.add(fachPanel);
+        filterContent.add(Box.createVerticalStrut(10));
 
-        filterPanel.add(stundePanel);
-        filterPanel.add(Box.createVerticalStrut(10));
+        filterContent.add(stundePanel);
+        filterContent.add(Box.createVerticalStrut(10));
 
-        filterPanel.add(tagPanel);
-        filterPanel.add(Box.createVerticalStrut(20));
-
-        JButton filterButton = new JButton("Filter anwenden");
-        filterPanel.add(filterButton);
+        filterContent.add(tagPanel);
+        filterContent.add(Box.createVerticalStrut(20));
 
         // Alles nach oben schieben
         filterPanel.add(Box.createVerticalGlue());
 
-        JScrollPane filterScroll = new JScrollPane(filterPanel);
-        filterScroll.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane filterScroll = new JScrollPane(filterContent);
+        filterScroll.setBorder(BorderFactory.createEmptyBorder());
+        filterScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         filterScroll.getVerticalScrollBar().setUnitIncrement(16);
 
-        add(filterScroll, BorderLayout.WEST);
+        filterPanel.add(filterScroll, BorderLayout.CENTER);
+
+        JButton filterButton = new JButton("Filter anwenden");
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(filterButton);
+        filterPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        add(filterPanel, BorderLayout.WEST);
 
         // =========================
         // ANZEIGENLISTE
@@ -103,20 +111,7 @@ public class HomeFrame extends JFrame {
                 )
         );
 
-        // Testdaten
-        addAnzeige(
-                "Mathematik",
-                "Q12",
-                "Dienstag 16-18 Uhr",
-                "Ich gebe Mathe-Nachhilfe."
-        );
-
-        addAnzeige(
-                "Informatik",
-                "Q11",
-                "Montag 15-17 Uhr",
-                "Hilfe bei Java und Programmierung."
-        );
+        ladeAlleAnzeigen();
 
         JScrollPane scrollPane = new JScrollPane(anzeigenPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -124,6 +119,26 @@ public class HomeFrame extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
+    }
+
+    private void ladeAlleAnzeigen() {
+
+        anzeigenPanel.removeAll();
+
+        AnzeigeDAO dao = new AnzeigeDAO();
+
+        for (Anzeige a : dao.getAlleAnzeigen()) {
+
+            addAnzeige(
+                    a.getFach(),
+                    a.getKlassenstufe(),
+                    a.getZeit(),
+                    a.getBeschreibung()
+            );
+        }
+
+        anzeigenPanel.revalidate();
+        anzeigenPanel.repaint();
     }
 
     /**

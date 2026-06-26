@@ -70,8 +70,39 @@ public class AnzeigeDAO {
         return null;
     }
 
+    public List<Anzeige> getAlleAnzeigen() {
+
+        List<Anzeige> anzeigen = new ArrayList<>();
+
+        String sql = "SELECT * FROM anzeigen";
+
+        try (
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                anzeigen.add(new Anzeige(
+                        rs.getInt("id"),
+                        rs.getInt("anbieter_id"),
+                        rs.getString("klassenstufe"),
+                        rs.getString("fach"),
+                        rs.getString("zeit"),
+                        rs.getString("beschreibung")
+                ));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return anzeigen;
+    }
+
     // Alle Anzeigen laden
-    public List<Anzeige> getAlleAnzeigen(int anbieterId) {
+    public List<Anzeige> getAlleAnzeigenAnbieter(int anbieterId) {
 
         List<Anzeige> anzeigen = new ArrayList<>();
 
