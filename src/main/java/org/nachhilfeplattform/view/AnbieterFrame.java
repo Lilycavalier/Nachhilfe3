@@ -5,14 +5,16 @@ import javax.swing.*;
 import org.nachhilfeplattform.database.AnzeigeDAO;
 import org.nachhilfeplattform.model.Anbieter;
 import org.nachhilfeplattform.model.Anzeige;
+import org.nachhilfeplattform.util.CurrentUser;
+
 import java.util.List;
 
 import java.awt.*;
 
 public class AnbieterFrame extends JFrame {
-    private Anbieter anbieter;
-    public AnbieterFrame(Anbieter anb) {
-        anbieter = anb;
+
+    public AnbieterFrame() {
+        Anbieter aktueller = CurrentUser.getAnbieter();
 
         setTitle("Anbieterbereich");
         setSize(1000, 700);
@@ -22,7 +24,7 @@ public class AnbieterFrame extends JFrame {
         setLayout(new BorderLayout(10, 10));
 
         // TITEL OBEN
-        JLabel titel = new JLabel("Anbieterbereich");
+        JLabel titel = new JLabel("Willkommen " + aktueller.getBenutzername() + "!");
         titel.setFont(new Font("Arial", Font.BOLD, 30));
         titel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -69,7 +71,7 @@ public class AnbieterFrame extends JFrame {
             AnzeigeDAO dao = new AnzeigeDAO();
 
             List<Anzeige> anzeigen =
-                    dao.getAlleAnzeigen(anbieter.getId());
+                    dao.getAlleAnzeigen(aktueller.getId());
 
             contentLabel.setText("Anzahl Anzeigen: " + anzeigen.size());
 
