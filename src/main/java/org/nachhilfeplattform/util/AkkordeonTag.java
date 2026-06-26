@@ -1,17 +1,15 @@
-package org.nachhilfeplattform.view;
+package org.nachhilfeplattform.util;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AkkordionFach extends JPanel{
+public class AkkordeonTag extends JPanel{
 
     private boolean expanded = false;
     private JButton arrowButton;
     private JPanel contentPanel;
 
-    public AkkordionFach(){
+    public AkkordeonTag(){
         setLayout(new BorderLayout());
 
         arrowButton = new JButton("+");
@@ -46,32 +44,20 @@ public class AkkordionFach extends JPanel{
         group.add(rb12);
         group.add(rb13);
 
-        contentPanel.add(new JLabel("Mathematik"));
+        contentPanel.add(new JLabel("Monstertag"));
         contentPanel.add(rb5);
 
-        contentPanel.add(new JLabel("Deutsch"));
+        contentPanel.add(new JLabel("Diensttag"));
         contentPanel.add(rb6);
 
-        contentPanel.add(new JLabel("Englisch"));
+        contentPanel.add(new JLabel("Mittleid"));
         contentPanel.add(rb7);
 
-        contentPanel.add(new JLabel("Latein"));
+        contentPanel.add(new JLabel("Dönertag"));
         contentPanel.add(rb8);
         
-        contentPanel.add(new JLabel("Französisch"));
+        contentPanel.add(new JLabel("Feiertag"));
         contentPanel.add(rb9);
-
-        contentPanel.add(new JLabel("Physik"));
-        contentPanel.add(rb10);
-
-        contentPanel.add(new JLabel("Chemie"));
-        contentPanel.add(rb11);
-
-        contentPanel.add(new JLabel("Informatik"));
-        contentPanel.add(rb12);
-
-        contentPanel.add(new JLabel("Biografie"));
-        contentPanel.add(rb13);
        
         contentPanel.setVisible(false);
 
@@ -84,15 +70,15 @@ public class AkkordionFach extends JPanel{
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         headerPanel.add(arrowButton);
-        headerPanel.add(new JLabel("Fach"));
+        headerPanel.add(new JLabel("Tag"));
 
         add(headerPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
     }
 
-    // public static void main(String[] args) {
-    //    SwingUtilities.invokeLater(ArrowToggleExample::new);
-    //}
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(AkkordeonJahrgangstufe::new);
+    }
 
         
     }

@@ -1,15 +1,15 @@
-package org.nachhilfeplattform.view;
+package org.nachhilfeplattform.util;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class AkkordionStunde extends JPanel{
+public class AkkordeonStunde extends JPanel{
 
     private boolean expanded = false;
     private JButton arrowButton;
     private JPanel contentPanel;
 
-    public AkkordionStunde(){
+    public AkkordeonStunde(){
         setLayout(new BorderLayout());
 
         arrowButton = new JButton("+");
@@ -89,7 +89,7 @@ public class AkkordionStunde extends JPanel{
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(AkkordionJahrgangstufe::new);
+        SwingUtilities.invokeLater(AkkordeonJahrgangstufe::new);
     }
 
         

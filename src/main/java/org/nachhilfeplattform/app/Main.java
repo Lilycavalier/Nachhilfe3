@@ -17,15 +17,6 @@ public class Main {
 
         System.out.println("Start GUI");
 
-        //hihi
-        AnbieterDAO anbieterDAO = new AnbieterDAO();
-        Anbieter lily =
-                new Anbieter("Lily", "lily@mail.de", "1234");
-
-        if (!anbieterDAO.emailExistiert("lily@mail.de")) {
-            anbieterDAO.AnbieterSpeichern(lily);
-        };
-
         javax.swing.SwingUtilities.invokeLater(() -> {
             new HomeFrame();
         });

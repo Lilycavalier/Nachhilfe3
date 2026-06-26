@@ -1,5 +1,10 @@
 package org.nachhilfeplattform.view;
 
+import org.nachhilfeplattform.util.AkkordeonFach;
+import org.nachhilfeplattform.util.AkkordeonJahrgangstufe;
+import org.nachhilfeplattform.util.AkkordeonStunde;
+import org.nachhilfeplattform.util.AkkordeonTag;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -47,51 +52,55 @@ public class HomeFrame extends JFrame {
         // =========================
 
         JPanel filterPanel = new JPanel();
-        filterPanel.setPreferredSize(new Dimension(250, 0));
+        filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.Y_AXIS));
         filterPanel.setBorder(
                 BorderFactory.createTitledBorder("Filter")
         );
 
-        filterPanel.setLayout(
-                new BoxLayout(
-                        filterPanel,
-                        BoxLayout.Y_AXIS
-                )
-        );
-
-        filterPanel.add(Box.createVerticalStrut(10));
-
-        AkkordionJahrgangstufe klassenPanel = new AkkordionJahrgangstufe();
-
-        AkkordionFach fachPanel = new AkkordionFach();
-
-        AkkordionStunde stundePanel = new AkkordionStunde();
-
-        AkkordionTag tagPanel = new AkkordionTag();
+        AkkordeonJahrgangstufe klassenPanel = new AkkordeonJahrgangstufe();
+        AkkordeonFach fachPanel = new AkkordeonFach();
+        AkkordeonStunde stundePanel = new AkkordeonStunde();
+        AkkordeonTag tagPanel = new AkkordeonTag();
 
         filterPanel.add(klassenPanel);
-        filterPanel.add(Box.createVerticalStrut(15));
-        filterPanel.add(fachPanel);
-        filterPanel.add(stundePanel);
-        filterPanel.add(tagPanel);
+        filterPanel.add(Box.createVerticalStrut(10));
 
-        add(filterPanel, BorderLayout.WEST);
+        filterPanel.add(fachPanel);
+        filterPanel.add(Box.createVerticalStrut(10));
+
+        filterPanel.add(stundePanel);
+        filterPanel.add(Box.createVerticalStrut(10));
+
+        filterPanel.add(tagPanel);
+        filterPanel.add(Box.createVerticalStrut(20));
+
+        JButton filterButton = new JButton("Filter anwenden");
+        filterPanel.add(filterButton);
+
+        // Alles nach oben schieben
+        filterPanel.add(Box.createVerticalGlue());
+
+        JScrollPane filterScroll = new JScrollPane(filterPanel);
+        filterScroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        filterScroll.getVerticalScrollBar().setUnitIncrement(16);
+
+        add(filterScroll, BorderLayout.WEST);
 
         // =========================
         // ANZEIGENLISTE
         // =========================
 
         anzeigenPanel = new JPanel();
+        anzeigenPanel.setBorder(
+                BorderFactory.createTitledBorder("Anzeigen")
+        );
 
         anzeigenPanel.setLayout(
                 new BoxLayout(
                         anzeigenPanel,
                         BoxLayout.Y_AXIS
                 )
-        );
-
-        anzeigenPanel.setBorder(
-                BorderFactory.createTitledBorder("Anzeigen")
         );
 
         // Testdaten
@@ -109,8 +118,8 @@ public class HomeFrame extends JFrame {
                 "Hilfe bei Java und Programmierung."
         );
 
-        JScrollPane scrollPane =
-                new JScrollPane(anzeigenPanel);
+        JScrollPane scrollPane = new JScrollPane(anzeigenPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         add(scrollPane, BorderLayout.CENTER);
 
