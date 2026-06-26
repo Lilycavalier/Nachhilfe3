@@ -30,14 +30,14 @@ public class AnbieterDAO {
         }
     }
 
-    public boolean login(String email, String passwort) {
+    public Anbieter login(String email, String passwort) {
+
         String sql =
                 "SELECT * FROM anbieter WHERE email = ? AND passwort = ?";
+
         try (
                 Connection conn = DatabaseConnection.getConnection();
-
-                PreparedStatement stmt =
-                        conn.prepareStatement(sql)
+                PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setString(1, email);
@@ -45,13 +45,24 @@ public class AnbieterDAO {
 
             ResultSet rs = stmt.executeQuery();
 
-            return rs.next();
+            if (rs.next()) {
+
+                Anbieter anbieter = new Anbieter(
+                        rs.getString("benutzername"),
+                        rs.getString("email"),
+                        rs.getString("passwort")
+                );
+
+                anbieter.setId(rs.getInt("id"));
+
+                return anbieter;
+            }
 
         } catch (Exception e) {
-
             e.printStackTrace();
-            return false;
         }
+
+        return null;
     }
 
     public boolean emailExistiert(String email) {
