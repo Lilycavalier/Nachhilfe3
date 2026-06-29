@@ -37,7 +37,6 @@ public class DatabaseInitializer {
             stmt.execute("PRAGMA foreign_keys = ON;");
             stmt.execute(sqlAnbieter);
             stmt.execute(sqlAnzeigen);
-            System.out.println("Tabellen erstellt!");
 
         } catch (Exception e) {
             e.printStackTrace();
