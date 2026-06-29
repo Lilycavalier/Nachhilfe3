@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 public class AnbieterDAO {
 
+    //neuen Anbieter erstellen (aktuell nur manuell)
     public void AnbieterSpeichern(Anbieter anbieter) {
 
         String sql =
@@ -65,6 +66,7 @@ public class AnbieterDAO {
         return null;
     }
 
+    // zum überprüfen ob email bereits existiert (bei Erstellung von neuem Anbieter)
     public boolean emailExistiert(String email) {
 
         String sql = "SELECT 1 FROM anbieter WHERE email = ?";

@@ -20,12 +20,6 @@ public class Anbieter {
         this.anzeigen = new ArrayList<>();
     }
 
-    public boolean passwortPruefen(String eingegebenesPasswort) {
-
-        return this.passwort.equals(eingegebenesPasswort);
-
-    }
-
     // Getter
 
     public int getId() {

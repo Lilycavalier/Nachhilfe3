@@ -37,39 +37,6 @@ public class AnzeigeDAO {
         }
     }
 
-    // Anzeige über ID laden
-    public Anzeige AnzeigeAufrufen(int id) {
-
-        String sql = "SELECT * FROM anzeigen WHERE id = ?";
-
-        try (
-                Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
-        ) {
-
-            stmt.setInt(1, id);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-
-                return new Anzeige(
-                        rs.getInt("id"),
-                        rs.getInt("anbieter_id"),
-                        rs.getString("klassenstufe"),
-                        rs.getString("fach"),
-                        rs.getString("zeit"),
-                        rs.getString("beschreibung")
-                );
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
     public List<Anzeige> getAlleAnzeigen() {
 
         List<Anzeige> anzeigen = new ArrayList<>();
@@ -109,8 +76,8 @@ public class AnzeigeDAO {
         String sql = "SELECT * FROM anzeigen WHERE anbieter_id = ?";
 
         try (
-            Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
             stmt.setInt(1, anbieterId);
@@ -135,7 +102,7 @@ public class AnzeigeDAO {
         return anzeigen;
     }
 
-    // Update Anzeige
+    // Update Anzeige (nötig falls wir noch Bearbeitung einführen)
     public void updateAnzeige(int id, Anzeige anzeige) {
 
         String sql = """
@@ -180,6 +147,7 @@ public class AnzeigeDAO {
         }
     }
 
+    // Anzeigen filtern nach Akkordeonauswahl
     public List<Anzeige> filterAnzeigen(List<String> faecher, List<String> klassen) {
 
         List<Anzeige> anzeigen = new ArrayList<>();
@@ -244,64 +212,4 @@ public class AnzeigeDAO {
 
         return anzeigen;
     }
-
-
-
-
-
-
-    //tag fehlt noch
-    public List<Anzeige> filter(String fach, String klassenstufe, String zeit) {
-
-    List<Anzeige> anzeigen = new ArrayList<>();
-
-    StringBuilder sql = new StringBuilder("SELECT * FROM anzeigen WHERE 1=1");
-
-    List<String> params = new ArrayList<>();
-
-    if (fach != null && !fach.isEmpty()) {
-        sql.append(" AND fach = ?");
-        params.add(fach);
-    }
-
-    if (klassenstufe != null && !klassenstufe.isEmpty()) {
-        sql.append(" AND klassenstufe = ?");
-        params.add(klassenstufe);
-    }
-
-    if (zeit != null && !zeit.isEmpty()) {
-        sql.append(" AND zeit = ?");
-        params.add(zeit);
-    }
-
-    try (
-            Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql.toString())
-    ) {
-
-        // Parameter dynamisch setzen
-        for (int i = 0; i < params.size(); i++) {
-            stmt.setString(i + 1, params.get(i));
-        }
-
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-
-            anzeigen.add(new Anzeige(
-                    rs.getInt("id"),
-                    rs.getInt("anbieter_id"),
-                    rs.getString("klassenstufe"),
-                    rs.getString("fach"),
-                    rs.getString("zeit"),
-                    rs.getString("beschreibung")
-            ));
-        }
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
-    return anzeigen;
-}
 }

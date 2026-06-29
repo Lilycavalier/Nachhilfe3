@@ -23,12 +23,8 @@ public class HomeFrame extends JFrame {
         setLayout(new BorderLayout(10, 10));
 
         // =========================
-        // TITEL
+        // TITEL + LOGIN BUTTON
         // =========================
-
-        // =========================
-// TITEL + LOGIN BUTTON
-// =========================
 
         JPanel topPanel = new JPanel(new BorderLayout());
 
@@ -68,9 +64,6 @@ public class HomeFrame extends JFrame {
 
         filterContent.add(fachPanel);
         filterContent.add(Box.createVerticalStrut(10));
-
-        // Alles nach oben schieben
-        filterPanel.add(Box.createVerticalGlue());
 
         JScrollPane filterScroll = new JScrollPane(filterContent);
         filterScroll.setBorder(BorderFactory.createEmptyBorder());
